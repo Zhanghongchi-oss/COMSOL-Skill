@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.class
+*.mph
+*.mphbin
+*.mphprj
+*.log
+.env
+.env.*
+*.private.json
+local-config/
+runs/
+outputs/
+.codex/
