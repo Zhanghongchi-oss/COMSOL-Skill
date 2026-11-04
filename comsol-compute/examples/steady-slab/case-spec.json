@@ -1,0 +1,203 @@
+{
+  "case_version": "1.0.0",
+  "case_id": "slab-steady-2d-20261101",
+  "protocol_schema_version": "2.0.0",
+  "purpose": "SYNTHETIC TEST FIXTURE ONLY; no skill-wide scientific defaults",
+  "execution_status": {
+    "compilation": "not_run",
+    "build": "not_run",
+    "save_reload": "not_run",
+    "modify": "not_run",
+    "compute": "not_run"
+  },
+  "geometry": {
+    "dimension": 2,
+    "coordinate_system": "Cartesian x-y",
+    "length_unit": "m",
+    "origin_m": [
+      0,
+      0
+    ],
+    "parameters": {
+      "L": {
+        "expression": "0.02[m]",
+        "unit": "m"
+      },
+      "H": {
+        "expression": "0.01[m]",
+        "unit": "m"
+      },
+      "thickness": {
+        "expression": "0.001[m]",
+        "unit": "m"
+      }
+    },
+    "modify": {
+      "parameter": "L",
+      "new_expression": "0.04[m]",
+      "only_requested_geometry_change": true
+    },
+    "audit_tolerance_m": 1e-09,
+    "tolerance_note": "fixture geometry audit tolerance only; not a universal numerical convergence threshold"
+  },
+  "physics": {
+    "interface": "Heat Transfer in Solids",
+    "stationary": true,
+    "conduction_only": true,
+    "conductivity": {
+      "parameter": "k_slab",
+      "expression": "10[W/(m*K)]",
+      "unit": "W/(m*K)",
+      "isotropic": true
+    },
+    "volumetric_heat_source": "0[W/m^3]",
+    "left_temperature": {
+      "parameter": "T_left",
+      "expression": "310[K]",
+      "unit": "K"
+    },
+    "right_temperature": {
+      "parameter": "T_right",
+      "expression": "290[K]",
+      "unit": "K"
+    },
+    "other_boundaries": "thermal insulation, inward heat flux = 0",
+    "out_of_plane": "Uniform across thickness; configured physical 2D thickness 0.001 m. Total W uses boundary length times thickness. No front/back loss.",
+    "physical_initial_state": {
+      "status": "not_applicable",
+      "reason": "Steady conduction fixture has no physical transient initial state. Any default Initial Values node is initialization metadata, not an asserted physical initial condition."
+    },
+    "solver_initial_guess": {
+      "owner": "compute",
+      "status": "not_prepared",
+      "constraint": "Record separately if needed; do not change physical boundary data."
+    },
+    "material_auxiliary_properties": "Only constant conductivity is required by this stationary conduction problem; no invented density or heat capacity."
+  },
+  "tags": {
+    "component": "comp1",
+    "geometry": "geom1",
+    "rectangle": "rect1",
+    "material": "mat1",
+    "physics": "ht",
+    "temperature_left": "temp_left",
+    "temperature_right": "temp_right",
+    "insulation": "ins1",
+    "selections": {
+      "domain": "dom_slab",
+      "left": "bnd_left",
+      "right": "bnd_right",
+      "bottom": "bnd_bottom",
+      "top": "bnd_top",
+      "insulated": "bnd_insulated"
+    }
+  },
+  "selection_contract": {
+    "dom_slab": {
+      "dimension": 2,
+      "count": 1,
+      "rule": "entire rectangle domain"
+    },
+    "bnd_left": {
+      "dimension": 1,
+      "count": 1,
+      "rule": "x=0, 0<=y<=H"
+    },
+    "bnd_right": {
+      "dimension": 1,
+      "count": 1,
+      "rule": "x=L, 0<=y<=H"
+    },
+    "bnd_bottom": {
+      "dimension": 1,
+      "count": 1,
+      "rule": "y=0, 0<=x<=L"
+    },
+    "bnd_top": {
+      "dimension": 1,
+      "count": 1,
+      "rule": "y=H, 0<=x<=L"
+    },
+    "bnd_insulated": {
+      "dimension": 1,
+      "count": 2,
+      "rule": "union of bottom and top; disjoint from left/right"
+    }
+  },
+  "target_outputs": [
+    {
+      "name": "temperature_field",
+      "expression": "T",
+      "unit": "K",
+      "selection": "dom_slab",
+      "coordinate_system": "global Cartesian",
+      "statistic": "pointwise field, no averaging",
+      "positions": "stationary; no time/frequency/mode; fixed parameters from this case",
+      "required_solution": "future stationary solution, owned by compute",
+      "analytic": "T(x,y)=T_left+(T_right-T_left)*x/L"
+    },
+    {
+      "name": "conductive_heat_flux",
+      "expression_definition": "q=(-k_slab*d(T,x),-k_slab*d(T,y))",
+      "unit": "W/m^2",
+      "selection": "dom_slab",
+      "coordinate_system": "global Cartesian",
+      "statistic": "vector components pointwise; +x sign convention",
+      "positions": "same stationary solution and fixed parameters",
+      "analytic": "qx=k_slab*(T_left-T_right)/L, qy=0"
+    },
+    {
+      "name": "through_heat_rate",
+      "expression_definition": "integral of qx over right boundary times thickness",
+      "unit": "W",
+      "selection": "bnd_right",
+      "coordinate_system": "global Cartesian",
+      "statistic": "outward +x flux integral, multiply thickness exactly once",
+      "positions": "same stationary solution and fixed parameters",
+      "analytic": "Q=k_slab*H*thickness*(T_left-T_right)/L"
+    }
+  ],
+  "analytic_reference": {
+    "base": {
+      "qx_W_per_m2": 10000,
+      "qy_W_per_m2": 0,
+      "Q_W": 0.1,
+      "T_mid_K": 300
+    },
+    "modified": {
+      "qx_W_per_m2": 5000,
+      "qy_W_per_m2": 0,
+      "Q_W": 0.05,
+      "T_mid_K": 300
+    },
+    "not_a_comsol_result": true
+  },
+  "expected_artifacts": {
+    "modeling": [
+      "modeling/BuildSlab.java",
+      "modeling/ModifySlab.java",
+      "modeling/CheckSlab.java",
+      "modeling/api-evidence.md",
+      "future: base/slab-base.mph",
+      "future: modified/slab-modified.mph",
+      "future: per-model check JSON and model-manifest.json"
+    ],
+    "compute": [
+      "compute/ preparation owned by compute executor",
+      "future: independent operation_review and runtime pins",
+      "future: mesh/study/solver config and solution/result records"
+    ],
+    "handoff_rule": "No real MPH/hash/check evidence or full model-manifest before authorized execution. Present package is preparation only. On actual output use common 2.0.0 manifest and immutable lineage."
+  },
+  "ownership": {
+    "case-spec.json": "modeling/shared maintainer",
+    "modeling": "modeling executor",
+    "compute": "compute executor"
+  },
+  "authorization": {
+    "comsol_execution": false,
+    "compile": false,
+    "license_probe": false,
+    "must_stop_for_review": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "case_id": "constant-conductivity-electrothermal-slab",
+  "scope": "Small analytic stationary electrothermal verification fixture, not generic material or solver defaults",
+  "geometry": {
+    "dimension": 2,
+    "L": "0.02[m]",
+    "H": "0.01[m]",
+    "thickness": "0.001[m]"
+  },
+  "materials": {
+    "k_slab": "10[W/(m*K)]",
+    "sigma_slab": "10000[S/m]",
+    "origin": "Explicit synthetic test constants; no measured material/library claim"
+  },
+  "boundary_conditions": {
+    "T_left": "300[K]",
+    "T_right": "300[K]",
+    "V_left": "0[V]",
+    "base_V_right": "0.1[V]",
+    "high_V_right": "0.2[V]",
+    "top_bottom": "Thermal and electric insulation"
+  },
+  "coupling": {
+    "tag": "emh",
+    "type": "ElectromagneticHeating",
+    "electrical_physics": "ec",
+    "thermal_physics": "ht",
+    "duplicate_heat_source_allowed": false
+  },
+  "physical_initial_condition": "Not prescribed: stationary problem; existing initialization metadata is not a declared physical transient initial state",
+  "geometry_audit_tolerance": "1e-10[m]",
+  "intended_operations": [
+    "build new base",
+    "read-only independent check",
+    "build new high-voltage model with identical geometry/materials",
+    "read-only independent check"
+  ],
+  "computation": "Separate compute skill must create mesh/study and verify actual solution; this modeling example never solves"
+}

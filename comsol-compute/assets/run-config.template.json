@@ -1,0 +1,62 @@
+{
+  "schema_version": "2.0.0",
+  "operation": "solve",
+  "execution_kind": "comsol",
+  "model": "models/replace-with-inspected-input.mph",
+  "manifest": "model-manifest.json",
+  "input_record": "input-record.json",
+  "operation_review": "compute-execution-review.json",
+  "scope": [],
+  "target_names": [],
+  "scripts": [
+    "replace-with-reviewed-adapter.py"
+  ],
+  "dependencies": [],
+  "argv": [
+    "REPLACE_WITH_ABSOLUTE_EXECUTABLE",
+    "REPLACE_WITH_ABSOLUTE_REVIEWED_ADAPTER_PATH",
+    "--run-dir",
+    "{run_dir}",
+    "--run-id",
+    "{run_id}",
+    "--fingerprint",
+    "{fingerprint}",
+    "--model",
+    "{model}"
+  ],
+  "script_review": {
+    "reviewed": false,
+    "operation": "solve",
+    "notes": "Incomplete format skeleton; review the task adapter before use",
+    "calls_solver": true
+  },
+  "expected_positions": {},
+  "outputs": [
+    {
+      "path": "solved.mph",
+      "role": "solved_model"
+    },
+    {
+      "path": "solver-observation.json",
+      "role": "solver_observation"
+    },
+    {
+      "path": "solution-readback.json",
+      "role": "solution_readback"
+    }
+  ],
+  "evidence": "evidence.json",
+  "logs": [
+    "batch.log"
+  ],
+  "parameters": {},
+  "solver_settings": {},
+  "resources": {
+    "timeout_seconds": null
+  },
+  "log_encodings": {
+    "stdout.log": null,
+    "stderr.log": null,
+    "batch.log": null
+  }
+}

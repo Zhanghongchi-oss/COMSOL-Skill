@@ -1,0 +1,4 @@
+interface:
+  display_name: "COMSOL Modeling"
+  short_description: "用 Java API 新建或修改 COMSOL 模型并检查结构，不执行网格与求解"
+  default_prompt: "使用 $comsol-modeling，根据当前需求和资料新建或修改 COMSOL 模型，并交付建模检查记录。"

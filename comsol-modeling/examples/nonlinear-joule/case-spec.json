@@ -1,0 +1,41 @@
+{
+  "case_id": "temperature-feedback-electrothermal-slab",
+  "scope": "Small analytic stationary bidirectional electrothermal verification fixture; no generic defaults",
+  "geometry": {
+    "dimension": 2,
+    "L": "0.02[m]",
+    "H": "0.01[m]",
+    "thickness": "0.001[m]"
+  },
+  "materials": {
+    "k_slab": "10[W/(m*K)]",
+    "sigma_slab": "10000[S/m]",
+    "origin": "Explicit synthetic test constants; no measured material/library claim",
+    "beta": "0.1[1/K]",
+    "T_ref": "300[K]",
+    "electricconductivity": "sigma_slab/(1+beta*(T-T_ref))"
+  },
+  "boundary_conditions": {
+    "T_left": "300[K]",
+    "T_right": "300[K]",
+    "V_left": "0[V]",
+    "base_V_right": "0.2[V]",
+    "low_V_right": "0.1[V]",
+    "top_bottom": "Thermal and electric insulation"
+  },
+  "coupling": {
+    "tag": "emh",
+    "type": "ElectromagneticHeating",
+    "electrical_physics": "ec",
+    "thermal_physics": "ht",
+    "duplicate_heat_source_allowed": false
+  },
+  "physical_initial_condition": "Not prescribed: stationary problem; existing initialization metadata is not a declared physical transient initial state",
+  "geometry_audit_tolerance": "1e-10[m]",
+  "intended_operations": [
+    "build new nonlinear slab",
+    "read-only independent check",
+    "wrong material-law negative check"
+  ],
+  "computation": "Separate compute skill must create mesh/study and verify actual solution; this modeling example never solves"
+}

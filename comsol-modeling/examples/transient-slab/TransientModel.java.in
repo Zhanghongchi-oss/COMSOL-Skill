@@ -1,0 +1,418 @@
+// Current-candidate small validation fixture. Status is recorded only after actual execution.
+
+import com.comsol.model.*;
+
+import com.comsol.model.physics.PhysicsFeature;
+
+import com.comsol.model.util.ModelUtil;
+
+import java.io.*;
+
+import java.nio.charset.StandardCharsets;
+
+import java.nio.file.*;
+
+import java.security.MessageDigest;
+
+import java.util.*;
+
+public class TransientModel {
+
+// @CONDUCTION_READBACK@
+
+    // TEST FIXTURE ONLY. No study, mesh, solver, result evaluation or license call.
+
+    private static final String C="comp1", G="geom1";
+
+    private static final List<String> checks=new ArrayList<String>();
+
+    private static String q(String s) { return "\""+s.replace("\\","\\\\").replace("\"","\\\"").replace("\n","\\n").replace("\r","\\r").replace("\t","\\t")+"\""; }
+
+    private static void ok(boolean value,String name,String detail) {
+
+        checks.add("{\"name\":"+q(name)+",\"status\":"+q(value?"passed":"failed")+",\"detail\":"+q(detail)+"}");
+
+        if (!value) throw new IllegalStateException(name+": "+detail);
+
+    }
+
+    private static String need(Properties p,String key) {
+
+        String value=p.getProperty(key); if(value==null||value.trim().isEmpty()) throw new IllegalArgumentException("Missing job key "+key);return value.trim();
+
+    }
+
+    private static Properties job() throws Exception {
+
+        Properties p=new Properties(); List<String> lines=Files.readAllLines(Paths.get("job.properties"),StandardCharsets.UTF_8);
+
+        for(int i=0;i<lines.size();i++) {
+
+            String line=lines.get(i);if(i==0&&line.startsWith("\uFEFF"))line=line.substring(1);line=line.trim();
+
+            if(line.isEmpty()||line.startsWith("#")||line.startsWith("!"))continue;
+
+            int n=line.indexOf('=');if(n<1||line.indexOf('\\')>=0)throw new IllegalArgumentException("Strict key=value only; no escapes/continuation");
+
+            String k=line.substring(0,n).trim(),v=line.substring(n+1).trim();
+
+            if(!k.matches("[A-Za-z_][A-Za-z0-9_.-]*")||p.containsKey(k))throw new IllegalArgumentException("Invalid/duplicate job key");p.setProperty(k,v);
+
+        }
+
+        if(!need(p,"case_spec_sha256").matches("[a-f0-9]{64}"))throw new IllegalArgumentException("Invalid case spec SHA256");
+
+        return p;
+
+    }
+
+    private static Path output(Properties p,String key,String suffix) throws Exception {
+
+        Path base=Paths.get("").toRealPath(), f=Paths.get(need(p,key)).toAbsolutePath().normalize();
+
+        if(!f.startsWith(base)||f.equals(base)||!f.toString().toLowerCase(Locale.ROOT).endsWith(suffix)||Files.exists(f))throw new IllegalArgumentException("New output must be inside run directory: "+key);
+
+        Path a=f.getParent();while(a!=null&&!Files.exists(a))a=a.getParent();
+
+        if(a==null||!a.toRealPath().startsWith(base))throw new IllegalArgumentException("Output parent escapes run directory");
+
+        Files.createDirectories(f.getParent());if(!f.getParent().toRealPath().startsWith(base))throw new IllegalArgumentException("Output parent changed");return f;
+
+    }
+
+    private static Path input(Properties p) throws Exception {
+
+        Path f=Paths.get(need(p,"input_model"));if(!f.isAbsolute()||!f.toString().toLowerCase(Locale.ROOT).endsWith(".mph"))throw new IllegalArgumentException("Absolute MPH input required");return f.toRealPath();
+
+    }
+
+    private static String sha(Path p) throws Exception {
+
+        MessageDigest md=MessageDigest.getInstance("SHA-256");try(InputStream in=Files.newInputStream(p)){byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1)md.update(b,0,n);}
+
+        StringBuilder s=new StringBuilder();for(byte b:md.digest())s.append(String.format(Locale.ROOT,"%02x",b&255));return s.toString();
+
+    }
+
+    private static String file(Path p) throws Exception {return p==null||!Files.isRegularFile(p)?"null":"{\"path\":"+q(p.toString())+",\"sha256\":"+q(sha(p))+"}";}
+
+    private static void report(Path dest,Properties p,Path model,Path source,String sourceHash,String op,boolean built,boolean loaded,boolean passed,Exception error) throws Exception {
+
+        if(error!=null)checks.add("{\"name\":\"execution\",\"status\":\"failed\",\"detail\":"+q(error.toString())+"}");
+
+        String s="{\"schema_version\":\"2.0.0\",\"record_type\":\"transient_model_check\",\"operation\":"+q(op)+",\"case_spec_sha256\":"+q(need(p,"case_spec_sha256"))+",\"model\":"+file(model)+",\"source_model\":"+(source==null||sourceHash==null?"null":"{\"path\":"+q(source.toString())+",\"sha256\":"+q(sourceHash)+"}")+",\"status\":"+q(passed?"passed":"failed")+",\"checks\":["+String.join(",",checks)+"],\"geometry_built_in_this_invocation\":"+built+",\"reload_performed\":"+loaded+",\"mesh_validation\":\"not_run\",\"solve_validation\":\"not_run\",\"scientific_validity_verified\":false}";
+
+        Files.write(dest,s.getBytes(StandardCharsets.UTF_8),StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE);
+
+    }
+
+    private static Set<String> strings(String[] a){return new HashSet<String>(Arrays.asList(a));}
+
+    private static Set<Integer> ids(int[] a){Set<Integer>s=new HashSet<Integer>();for(int n:a)s.add(n);return s;}
+
+    private static void eq(String a,String b,String name){ok(a.equals(b),name,"observed="+a+" expected="+b);}
+
+    private static void near(double a,double b,double tol,String name){ok(Double.isFinite(a)&&Math.abs(a-b)<=tol,name,"observed="+a+" expected="+b+" tolerance="+tol);}
+
+    private static void bbox(Model m,String tag,int dim,int count,double[] expected,double tol) {
+
+        eq(m.component(C).selection(tag).geom(),G,"selection_geometry:"+tag);
+
+        ok(m.component(C).selection(tag).dim()==dim,"selection_dimension:"+tag,"expected="+dim);
+
+        int[] es=m.component(C).selection(tag).entities(dim);ok(es.length==count,"selection_count:"+tag,"observed="+es.length);
+
+        m.component(C).measure().selection().named(tag);double[] b=m.component(C).measure().getBoundingBox();
+
+        ok(b.length==expected.length,"bbox_dimension:"+tag,Arrays.toString(b));
+
+        for(int i=0;i<b.length;i++) {
+            double error=Math.abs(b[i]-expected[i]);
+            double quantized=(double)(float)expected[i],halfUlp=0.5*(double)Math.ulp((float)expected[i]);
+            // This fixture observed exact float32-rounded bbox coordinates. The API
+            // returns double[] without promising precision. Accept only that exact
+            // round-trip value within half one float ULP, or the original tolerance.
+            boolean measuredRounding=b[i]==quantized&&error<=halfUlp;
+            ok(Double.isFinite(b[i])&&(error<=tol||measuredRounding),"bbox:"+tag+":"+i,
+                "observed="+b[i]+" expected="+expected[i]+" strict_tolerance="+tol+" float32_roundtrip="+quantized+" half_float32_ulp="+halfUlp+" exact_roundtrip_match="+measuredRounding);
+        }
+
+    }
+
+    private static void check(Model m,Properties p) {
+
+        ok(strings(m.component().tags()).equals(strings(new String[]{C})),"component_set",Arrays.toString(m.component().tags()));
+
+        ok(strings(m.component(C).geom().tags()).equals(strings(new String[]{G})),"geometry_set",Arrays.toString(m.component(C).geom().tags()));
+
+        ok(m.component(C).geom(G).getSDim()==2,"geometry_dimension","2D Cartesian rectangle");
+
+        eq(m.component(C).geom(G).lengthUnit(),"m","geometry_units");
+
+        ok(strings(m.component(C).geom(G).feature().tags()).equals(strings(new String[]{"rect1","fin"})),"geometry_features",Arrays.toString(m.component(C).geom(G).feature().tags()));
+
+        eq(m.component(C).geom(G).feature("rect1").getType(),"Rectangle","rectangle_type");
+        ok(Arrays.equals(m.component(C).geom(G).feature("rect1").getStringArray("size"),new String[]{"L","H"}),"rectangle_size_expressions","L,H exact geometry definition");
+        ok(Arrays.equals(m.component(C).geom(G).feature("rect1").getStringArray("pos"),new String[]{"0","0"}),"rectangle_position_expressions","0,0 exact geometry definition");
+
+        ok(!m.component(C).geom(G).feature("rect1").hasError()&&!m.component(C).geom(G).feature("rect1").hasWarning(),"geometry_messages",m.component(C).geom(G).feature("rect1").message());
+
+        ok(!m.component(C).geom(G).feature("fin").hasError()&&!m.component(C).geom(G).feature("fin").hasWarning(),"final_geometry_messages",m.component(C).geom(G).feature("fin").message());
+
+        for(String key:new String[]{"L","H","thickness","k_slab","rho_slab","Cp_slab","T_base","T_amp"})eq(m.param().get(key),need(p,key),"parameter:"+key);
+
+        eq(m.param().get("audit_tol"),need(p,"audit_tolerance"),"audit_tolerance");
+
+        double l=m.param().evaluate("L"),h=m.param().evaluate("H"),tol=m.param().evaluate("audit_tol");
+
+        ok(tol>0&&l>2*tol&&h>2*tol,"positive_geometry","Tolerance is fixture-specific");
+
+        bbox(m,"dom_slab",2,1,new double[]{0,l,0,h},tol);
+
+        bbox(m,"bnd_left",1,1,new double[]{0,0,0,h},tol);bbox(m,"bnd_right",1,1,new double[]{l,l,0,h},tol);
+
+        bbox(m,"bnd_bottom",1,1,new double[]{0,l,0,0},tol);bbox(m,"bnd_top",1,1,new double[]{0,l,h,h},tol);
+
+        bbox(m,"bnd_insulated",1,2,new double[]{0,l,0,h},tol);
+
+        Set<Integer> ins=ids(m.component(C).selection("bnd_bottom").entities(1));ins.addAll(ids(m.component(C).selection("bnd_top").entities(1)));
+
+        ok(ins.equals(ids(m.component(C).selection("bnd_insulated").entities(1))),"insulated_union","Bottom union top");
+
+        Set<Integer> lr=ids(m.component(C).selection("bnd_left").entities(1));lr.addAll(ids(m.component(C).selection("bnd_right").entities(1)));
+
+        Set<Integer> overlap=new HashSet<Integer>(ins);overlap.retainAll(lr);ok(overlap.isEmpty()&&lr.size()==2,"boundary_disjointness","Left/right disjoint from insulation");
+
+        ins.addAll(lr);m.component(C).measure().selection().geom(G,1);m.component(C).measure().selection().all();
+
+        ok(ins.equals(ids(m.component(C).measure().selection().entities(1))),"boundary_coverage","Four exterior boundaries covered");
+
+        ok(strings(m.component(C).material().tags()).equals(strings(new String[]{"mat1"})),"material_set",Arrays.toString(m.component(C).material().tags()));
+
+        ok(m.component(C).material("mat1").isActive(),"material_active","Slab material is active");
+
+        eq(m.component(C).material("mat1").selection().named(),"dom_slab","material_binding");
+
+        ok(strings(m.component(C).physics().tags()).equals(strings(new String[]{"ht"})),"physics_set",Arrays.toString(m.component(C).physics().tags()));
+
+        eq(m.component(C).physics("ht").selection().named(),"dom_slab","physics_binding");
+
+        ConductionChecks.check(m,C,G,"ht","solid1","mat1","def","dom_slab","k_slab","thickness",
+
+            (passed,name,observed) -> ok(passed,name,observed));
+
+        for(String side:new String[]{"left","right"}) {
+
+            PhysicsFeature f=m.component(C).physics("ht").feature("temp_"+side);
+
+            eq(f.getType(),"TemperatureBoundary","temperature_type:"+side);ok(f.isActive(),"temperature_active:"+side,"Active");
+
+            eq(f.selection().named(),"bnd_"+side,"temperature_selection:"+side);eq(f.getString("T0"),"T_base","temperature_value:"+side);
+
+        }
+
+        PhysicsFeature insulation=m.component(C).physics("ht").feature("ins1");eq(insulation.getType(),"ThermalInsulation","insulation_type");ok(insulation.isActive(),"insulation_active","Default all-boundary fallback; fixed T overrides left/right only");
+
+        Set<Integer> residual=ids(m.component(C).selection("bnd_insulated").entities(1));
+
+        ok(ids(insulation.selection().entities(1)).containsAll(residual),"actual_insulation_coverage","Default selected boundaries include both top and bottom");
+
+        int temps=0,solids=0;
+
+        for(String tag:m.component(C).physics("ht").feature().tags()) {PhysicsFeature f=m.component(C).physics("ht").feature(tag);if(f.getType().equals("TemperatureBoundary"))temps++;if(f.getType().equals("SolidHeatTransferModel"))solids++;}
+
+        ok(temps==2&&solids==1,"constitutive_and_boundary_override_set","One solid and exactly two temperature overrides; no heat source or flux features");
+
+        checkTransient(m,p);
+        ok(m.component(C).pair().tags().length==0&&m.component(C).multiphysics().tags().length==0,"no_pair_or_coupling","Pure transient conduction");
+
+        ok(m.study().tags().length==0&&m.sol().tags().length==0,"no_study_or_solution","This modeling fixture must precede compute; no deletion performed");
+
+        ok(m.component(C).mesh().tags().length==0,"no_mesh","Modeling does not configure mesh");
+
+        eq(m.param("auditMetadata").get("audit_scale"),"2","nonempty_parameter_group");
+
+        eq(m.variable("auditGlobal").get("audit_global"),"audit_scale","global_variable_definition");
+
+        eq(m.component(C).variable("auditComponent").get("audit_component"),"audit_scale*x/L","component_variable_definition");
+
+        eq(m.component(C).variable("auditComponent").selection().named(),"dom_slab","variable_selection");
+
+    }
+
+    private static void checkTransient(Model m,Properties p) {
+        PhysicsFeature solid=m.component(C).physics("ht").feature("solid1");
+        eq(solid.getString("rho_mat"),"from_mat","density_material_source");
+        eq(solid.getString("Cp_mat"),"from_mat","heatcapacity_material_source");
+        ok(Arrays.equals(m.component(C).material("mat1").propertyGroup("def").getStringArray("density"),new String[]{"rho_slab"}),"density_expression","rho_slab");
+        ok(Arrays.equals(m.component(C).material("mat1").propertyGroup("def").getStringArray("heatcapacity"),new String[]{"Cp_slab"}),"heatcapacity_expression","Cp_slab");
+        ok(m.param().evaluate("rho_slab")>0&&m.param().evaluate("Cp_slab")>0&&m.param().evaluate("k_slab")>0,"positive_thermal_properties","Current fixture values positive");
+        PhysicsFeature init=m.component(C).physics("ht").feature("init1");
+        eq(init.getType(),"init","physical_initial_type");ok(init.isActive(),"physical_initial_active","init1 active");
+        eq(init.getString("Tinit_src"),"userdef","physical_initial_source");
+        eq(init.getString("Tinit"),"T_base+T_amp*sin(pi*x/L)","physical_initial_expression");
+        ok(init.selection().dim()==2&&ids(init.selection().entities(2)).equals(ids(m.component(C).selection("dom_slab").entities(2))),"physical_initial_domain_coverage","actual domain set");
+        int n=0;for(String tag:m.component(C).physics("ht").feature().tags())if(m.component(C).physics("ht").feature(tag).getType().equals("init"))n++;
+        ok(n==1,"unique_physical_initial_feature","No additional initial-value overrides");
+    }
+
+    private static void box(Model m,String tag,String axis,double min,Double max) {
+
+        m.component(C).selection().create(tag,"Box");m.component(C).selection(tag).set("entitydim",1);m.component(C).selection(tag).set("condition","allvertices");
+
+        m.component(C).selection(tag).set(axis+"min",min);if(max!=null)m.component(C).selection(tag).set(axis+"max",max.doubleValue());
+
+    }
+
+    private static Model build(Properties p) {
+
+        Model m=ModelUtil.create(ModelUtil.uniquetag("slab"));
+
+        for(String key:new String[]{"L","H","thickness","k_slab","rho_slab","Cp_slab","T_base","T_amp"})m.param().set(key,need(p,key));
+
+        m.param().set("audit_tol",need(p,"audit_tolerance"));
+
+        m.param().group().create("auditMetadata");m.param("auditMetadata").set("audit_scale","2");
+
+        m.variable().create("auditGlobal");m.variable("auditGlobal").set("audit_global","audit_scale");
+
+        m.component().create(C,true);m.component(C).geom().create(G,2);m.component(C).geom(G).lengthUnit("m");
+
+        m.component(C).geom(G).create("rect1","Rectangle");m.component(C).geom(G).feature("rect1").set("size",new String[]{"L","H"});
+
+        m.component(C).geom(G).feature("rect1").set("pos",new String[]{"0","0"});m.component(C).geom(G).run();
+
+        m.component(C).selection().create("dom_slab","Explicit");m.component(C).selection("dom_slab").geom(G,2);m.component(C).selection("dom_slab").all();
+
+        m.component(C).variable().create("auditComponent");
+
+        m.component(C).variable("auditComponent").selection().named("dom_slab");
+
+        m.component(C).variable("auditComponent").set("audit_component","audit_scale*x/L");
+
+        double tol=m.param().evaluate("audit_tol");
+
+        // Positive-axis all-vertex predicates remain valid after changing L only.
+
+        box(m,"bnd_left","x",-tol,tol);box(m,"bnd_right","x",tol,null);
+
+        box(m,"bnd_bottom","y",-tol,tol);box(m,"bnd_top","y",tol,null);
+
+        m.component(C).selection().create("bnd_insulated","Union");m.component(C).selection("bnd_insulated").set("entitydim",1);m.component(C).selection("bnd_insulated").set("input",new String[]{"bnd_bottom","bnd_top"});
+
+        m.component(C).material().create("mat1","Common");m.component(C).material("mat1").selection().named("dom_slab");
+
+        m.component(C).material("mat1").propertyGroup("def").set("thermalconductivity",new String[]{"k_slab","0","0","0","k_slab","0","0","0","k_slab"});
+
+        m.component(C).physics().create("ht","HeatTransfer",G);m.component(C).physics("ht").selection().named("dom_slab");
+
+        m.component(C).physics("ht").prop("PhysicalModelProperty").set("dz_src","userdef");m.component(C).physics("ht").prop("PhysicalModelProperty").set("dz","thickness");
+
+        m.component(C).physics("ht").feature("solid1").set("k_mat","from_mat");
+
+        for(String side:new String[]{"left","right"}) {m.component(C).physics("ht").create("temp_"+side,"TemperatureBoundary",1);m.component(C).physics("ht").feature("temp_"+side).selection().named("bnd_"+side);m.component(C).physics("ht").feature("temp_"+side).set("T0","T_base");}
+
+        m.component(C).material("mat1").propertyGroup("def").set("density",new String[]{"rho_slab"});
+        m.component(C).material("mat1").propertyGroup("def").set("heatcapacity",new String[]{"Cp_slab"});
+        m.component(C).physics("ht").feature("solid1").set("rho_mat","from_mat");
+        m.component(C).physics("ht").feature("solid1").set("Cp_mat","from_mat");
+        m.component(C).physics("ht").feature("init1").set("Tinit_src","userdef");
+        m.component(C).physics("ht").feature("init1").set("Tinit","T_base+T_amp*sin(pi*x/L)");
+        return m;
+
+    }
+
+    // Supplemental read-only diagnostics. They never determine pass/fail or alter settings.
+
+    private static void diagnosticValues(List<String> lines,String label,ParameterEntity node) {
+
+        for(String key:node.properties()) {
+
+            try {
+
+                String type=node.getValueType(key),value;
+
+                if("String".equals(type))value=node.getString(key);
+
+                else if("StringArray".equals(type))value=Arrays.toString(node.getStringArray(key));
+
+                else if("StringMatrix".equals(type))value=Arrays.deepToString(node.getStringMatrix(key));
+
+                else if("Boolean".equals(type))value=Boolean.toString(node.getBoolean(key));
+
+                else if("Double".equals(type))value=Double.toString(node.getDouble(key));
+
+                else if("DoubleArray".equals(type))value=Arrays.toString(node.getDoubleArray(key));
+
+                else if("DoubleMatrix".equals(type))value=Arrays.deepToString(node.getDoubleMatrix(key));
+
+                else value="not_read_type="+type;
+
+                lines.add(label+"\t"+key+"\t"+type+"\t"+String.valueOf(value).replace("\n"," ").replace("\r"," "));
+
+            } catch(Exception e) {lines.add(label+"\t"+key+"\tread_error\t"+e.toString().replace("\n"," ").replace("\r"," "));}
+
+        }
+
+    }
+
+    private static void diagnosticFeature(List<String> lines,PhysicsFeature feature) {
+
+        lines.add("feature\t"+feature.tag()+"\t"+feature.getType()+"\tactive="+feature.isActive());
+
+        diagnosticValues(lines,"feature:"+feature.tag(),feature);
+
+        for(String tag:feature.feature().tags())diagnosticFeature(lines,feature.feature(tag));
+
+    }
+
+    private static void diagnostics(Model m,Properties p) throws Exception {
+
+        List<String> lines=new ArrayList<String>();
+
+        lines.add("runtime\tversion\tString\t"+ModelUtil.getComsolVersion());
+
+        for(String tag:m.component(C).physics("ht").prop().tags())diagnosticValues(lines,"physics-property:"+tag,m.component(C).physics("ht").prop(tag));
+
+        diagnosticValues(lines,"material:mat1:def",m.component(C).material("mat1").propertyGroup("def"));
+
+        for(String tag:m.component(C).physics("ht").feature().tags())diagnosticFeature(lines,m.component(C).physics("ht").feature(tag));
+
+        Files.write(output(p,"diagnostic_output",".tsv"),lines,StandardCharsets.UTF_8,StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE);
+
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        Properties p=job();String mode=need(p,"mode");if(!mode.equals("build")&&!mode.equals("check"))throw new IllegalArgumentException("Only build or read-only check supported");
+
+        Path evidence=output(p,"check_output",".json"),target=null;String before=null;Model m=null;boolean built=false,loaded=false,passed=false;Exception failure=null;
+
+        try {
+
+            if(mode.equals("build")) {
+
+                target=output(p,"output_model",".mph");m=build(p);built=true;diagnostics(m,p);check(m,p);m.save(target.toString());ModelUtil.remove(m.tag());m=null;
+
+                m=ModelUtil.loadCopy(ModelUtil.uniquetag("transientReload"),target.toString());loaded=true;check(m,p);
+
+            } else {
+
+                target=input(p);before=sha(target);m=ModelUtil.loadCopy(ModelUtil.uniquetag("transientCheck"),target.toString());loaded=true;check(m,p);
+
+                ok(before.equals(sha(target)),"source_file_unchanged","read-only loadCopy");
+
+            }
+
+            passed=true;
+
+        } catch(Exception e){failure=e;} finally {if(m!=null)ModelUtil.remove(m.tag());}
+
+        report(evidence,p,target,null,null,mode,built,loaded,passed,failure);
+
+        if(failure!=null)throw failure;
+
+    }
+
+}
+

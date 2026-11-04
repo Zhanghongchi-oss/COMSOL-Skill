@@ -1,0 +1,31 @@
+{
+  "case_id": "transient-sinusoidal-slab",
+  "scope": "Explicit small transient verification fixture; no universal defaults",
+  "parameters": {
+    "L": "0.02[m]",
+    "H": "0.01[m]",
+    "thickness": "0.001[m]",
+    "k_slab": "10[W/(m*K)]",
+    "rho_slab": "1000[kg/m^3]",
+    "Cp_slab": "1000[J/(kg*K)]",
+    "T_base": "300[K]",
+    "T_amp": "10[K]"
+  },
+  "geometry_dimension": 2,
+  "initial_condition": "T_base+T_amp*sin(pi*x/L)",
+  "initial_selection": "dom_slab",
+  "boundary_conditions": {
+    "bnd_left": "T_base",
+    "bnd_right": "T_base",
+    "bnd_top": "insulated",
+    "bnd_bottom": "insulated"
+  },
+  "materials": {
+    "thermalconductivity": "k_slab",
+    "density": "rho_slab",
+    "heatcapacity": "Cp_slab"
+  },
+  "analytic_solution": "T_base+T_amp*sin(pi*x/L)*exp(-k_slab*pi^2*t/(rho_slab*Cp_slab*L^2))",
+  "geometry_audit_tolerance": "1e-10[m]",
+  "computation": "Separate compute skill owns mesh, studies, solver, saved-solution continuation and result validation; physical init1 remains unchanged."
+}

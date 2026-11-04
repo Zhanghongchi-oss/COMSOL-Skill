@@ -1,0 +1,282 @@
+{
+  "schema_version": "2.0.0",
+  "producer": {
+    "skill": "external-inspection",
+    "operation": "inspect"
+  },
+  "model": {
+    "path": "models/replace-with-inspected-input.mph",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "source_model": null,
+  "comsol": {
+    "version": "pending model inspection",
+    "build": null,
+    "license_status": "unknown",
+    "license_evidence": []
+  },
+  "inventory": {
+    "components": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "selections": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "pairs": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "parameters": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "materials": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "dependencies": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "target_outputs": {
+      "status": "partial",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "assumptions": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "coordinate_systems": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "physical_initial_conditions": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "legacy_meshes": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "legacy_studies": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    },
+    "legacy_solutions": {
+      "status": "not_inspected",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INPUT_AND_TARGET_INSPECTION"
+      ]
+    }
+  },
+  "components": null,
+  "selections": null,
+  "pairs": null,
+  "parameters": null,
+  "materials": null,
+  "dependencies": null,
+  "assumptions": null,
+  "coordinate_systems": null,
+  "physical_initial_conditions": null,
+  "legacy": {
+    "meshes": null,
+    "studies": null,
+    "solutions": null
+  },
+  "unresolved": [
+    {
+      "id": "U_INPUT_AND_TARGET_INSPECTION",
+      "question": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "owner": "shared",
+      "evidence": [],
+      "affected_scope": [
+        "all"
+      ],
+      "impacts": {
+        "solve": {
+          "effect": "blocks",
+          "reason": "Model inventory, dependencies and target semantics must be confirmed before this operation."
+        },
+        "resume": {
+          "effect": "blocks",
+          "reason": "Model inventory, dependencies and target semantics must be confirmed before this operation."
+        },
+        "export": {
+          "effect": "blocks",
+          "reason": "Model inventory, dependencies and target semantics must be confirmed before this operation."
+        }
+      }
+    }
+  ],
+  "target_outputs": [
+    {
+      "name": "replace_with_requested_quantity",
+      "status": "pending",
+      "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+      "selection_ref": {
+        "kind": "pending",
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "required_solution": {
+        "status": "pending",
+        "kind": "pending",
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "expression": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "unit": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "coordinate_system": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "statistic": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "time": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "frequency": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "parameters": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      },
+      "mode": {
+        "status": "pending",
+        "value": null,
+        "reason": "Format example only: the actual model and requested quantity have not been inspected or defined.",
+        "unresolved_ids": [
+          "U_INPUT_AND_TARGET_INSPECTION"
+        ]
+      }
+    }
+  ],
+  "checks": {
+    "geometry_build": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "No COMSOL process or model-content inspection has been performed for this format example."
+    },
+    "structure": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "No COMSOL process or model-content inspection has been performed for this format example."
+    },
+    "reload": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "No COMSOL process or model-content inspection has been performed for this format example."
+    },
+    "mesh_validation": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "No COMSOL process or model-content inspection has been performed for this format example."
+    },
+    "solve_validation": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "No COMSOL process or model-content inspection has been performed for this format example."
+    },
+    "details": []
+  }
+}

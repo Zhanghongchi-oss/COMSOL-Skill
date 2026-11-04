@@ -1,0 +1,48 @@
+{
+  "status": "offline_port_complete_not_new_runtime_validation",
+  "date": "2026-11-02",
+  "tests": {
+    "port_regression": {
+      "count": 54,
+      "passed": 54,
+      "record": "tests/port-results-20261102.json"
+    },
+    "production_comparator_mock": {
+      "count": 48,
+      "passed": 48,
+      "record": "tests/results-comparator-02/results.json"
+    },
+    "original_comparator_port_attempt": {
+      "count": 48,
+      "passed": 47,
+      "record": "tests/results-comparator-01/results.json",
+      "reason": "Old synthetic export fixture incorrectly kept generation parent as operation input. Fixture now uses carrier; individual valid exports pass, two different carriers are not automatically a same-input refinement pair."
+    }
+  },
+  "evidence_levels": {
+    "historical_numeric_data": "Historical measured data offline recomputation only; no present MPH validation",
+    "quality_consumer": "Synthetic corrected envelope tests; original top-level boundary quality is preserved in fixtures",
+    "java_api": "local official documentation and source inspection only",
+    "new_comsol": "not_run",
+    "new_compilation": "not_run",
+    "nonlinear_transient_other_physics_resume": "not_verified"
+  },
+  "limits": [
+    "Only authored Cartesian single-domain 2D stationary slab, triangle layouts3/6 with exactly affine nodes. Correspondence proves actual corner topology for this scope, not arbitrary high-order/curved/3D equivalence.",
+    "Fresh solve refuses pre-existing solvers; actual enumeration plus owning study must uniquely identify solver.",
+    "Existing export requires unique reviewed logical ID, actual solution ID, tag, evidence and actual carrier hash; this adapter explicitly supports solution_id equal tag and carrier equal operation input only.",
+    "cdset exists only in readback process and is not saved. Export never saves input.",
+    "No numerical convergence rate, experimental validity or reliable resume claim from two affine meshes.",
+    "Explicit resource settings required; former1core/2GiB/180s are not defaults.",
+    "New Java quality/trace/preflight guards require future authorized compilation and runtime validation. getenv entry was not demonstrated to fail."
+  ],
+  "files": {
+    "scripts\\compare_mesh.py": "5ad04a6e799a2451e632183b31295f636abb0fd84f789c65e247fda3bcf3bc65",
+    "scripts\\prepare_case.py": "6a734549dbb1d51a76f403e3b6e1df42ddf6fb62a1dd94f9a408ecbca270d9bc",
+    "scripts\\resource_guard.py": "337c9a528da0f965ed61052bc999662058c49f985f57d0af22748afbf07a9a28",
+    "scripts\\stage_driver.py": "3d850a71a58340743db14ba2d38253d69cdeb53a2e6db16c392e82af157432ed",
+    "src\\SlabComputeAdapter.java": "ada2141ec3fd0071433170d1690e095b8d54b3453ff7161549d5fda68e6ec22f",
+    "case-spec.json": "35173c3cf5f06594a3a78dadca3f976e394489d9a8c840b65634c088203926cf",
+    "api-port-evidence.json": "f1e2ac8d584f747122bf5e4b036a08ef8861ce493ff696abfbf321c69373da4b"
+  }
+}

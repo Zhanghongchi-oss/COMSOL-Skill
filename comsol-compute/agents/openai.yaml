@@ -1,0 +1,4 @@
+interface:
+  display_name: "COMSOL Compute"
+  short_description: "为已建 COMSOL 模型准备或执行研究求解、结果提取及数值验证"
+  default_prompt: "使用 $comsol-compute 核对我的模型交接资料，并按本次授权范围完成计算准备、运行或结果提取。"

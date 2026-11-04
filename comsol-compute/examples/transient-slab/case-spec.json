@@ -1,0 +1,216 @@
+{
+  "case_id": "transient-sine-slab",
+  "parameters": {
+    "L": "0.02[m]",
+    "H": "0.01[m]",
+    "thickness": "0.001[m]",
+    "k_slab": "10[W/(m*K)]",
+    "rho_slab": "1000[kg/m^3]",
+    "Cp_slab": "1000[J/(kg*K)]",
+    "T_base": "300[K]",
+    "T_amp": "10[K]"
+  },
+  "target_outputs_by_kind": {
+    "full": {
+      "name": "temperature_field",
+      "status": "complete",
+      "reason": "Current requested transient field, no solved claim.",
+      "expression": {
+        "status": "complete",
+        "value": "T",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "unit": {
+        "status": "complete",
+        "value": "K",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "selection_ref": {
+        "kind": "named",
+        "component": "comp1",
+        "selection": "dom_slab"
+      },
+      "coordinate_system": {
+        "status": "complete",
+        "value": "global",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "statistic": {
+        "status": "complete",
+        "value": "Exactly 45 point samples at x_i=i*L/8 (i=0..8), y_j=j*H/4 (j=0..4), in meters, j outer/i inner. At every requested saved time solnum. Global Cartesian frame; domain dom_slab. ext=0, recover=off, coorderr=on, matherr=on; finite real values. No spatial averaging or extrapolation.",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "time": {
+        "status": "complete",
+        "value": "time in s: 0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "frequency": {
+        "status": "not_applicable",
+        "value": null,
+        "reason": "No frequency/parameter sweep or mode.",
+        "unresolved_ids": []
+      },
+      "parameters": {
+        "status": "complete",
+        "value": "L=0.02[m]; H=0.01[m]; thickness=0.001[m]; k_slab=10[W/(m*K)]; rho_slab=1000[kg/m^3]; Cp_slab=1000[J/(kg*K)]; T_base=300[K]; T_amp=10[K]",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "mode": {
+        "status": "not_applicable",
+        "value": null,
+        "reason": "No frequency/parameter sweep or mode.",
+        "unresolved_ids": []
+      },
+      "required_solution": {
+        "status": "complete",
+        "kind": "planned",
+        "id": "transient-full",
+        "reason": "Future requested field; resume additionally requires separately reviewed source solution.",
+        "unresolved_ids": []
+      }
+    },
+    "half": {
+      "name": "temperature_field",
+      "status": "complete",
+      "reason": "Current requested transient field, no solved claim.",
+      "expression": {
+        "status": "complete",
+        "value": "T",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "unit": {
+        "status": "complete",
+        "value": "K",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "selection_ref": {
+        "kind": "named",
+        "component": "comp1",
+        "selection": "dom_slab"
+      },
+      "coordinate_system": {
+        "status": "complete",
+        "value": "global",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "statistic": {
+        "status": "complete",
+        "value": "Exactly 45 point samples at x_i=i*L/8 (i=0..8), y_j=j*H/4 (j=0..4), in meters, j outer/i inner. At every requested saved time solnum. Global Cartesian frame; domain dom_slab. ext=0, recover=off, coorderr=on, matherr=on; finite real values. No spatial averaging or extrapolation.",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "time": {
+        "status": "complete",
+        "value": "time in s: 0.0,0.1,0.2,0.3,0.4,0.5",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "frequency": {
+        "status": "not_applicable",
+        "value": null,
+        "reason": "No frequency/parameter sweep or mode.",
+        "unresolved_ids": []
+      },
+      "parameters": {
+        "status": "complete",
+        "value": "L=0.02[m]; H=0.01[m]; thickness=0.001[m]; k_slab=10[W/(m*K)]; rho_slab=1000[kg/m^3]; Cp_slab=1000[J/(kg*K)]; T_base=300[K]; T_amp=10[K]",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "mode": {
+        "status": "not_applicable",
+        "value": null,
+        "reason": "No frequency/parameter sweep or mode.",
+        "unresolved_ids": []
+      },
+      "required_solution": {
+        "status": "complete",
+        "kind": "planned",
+        "id": "transient-half",
+        "reason": "Future requested field; resume additionally requires separately reviewed source solution.",
+        "unresolved_ids": []
+      }
+    },
+    "resume": {
+      "name": "temperature_field",
+      "status": "complete",
+      "reason": "Current requested transient field, no solved claim.",
+      "expression": {
+        "status": "complete",
+        "value": "T",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "unit": {
+        "status": "complete",
+        "value": "K",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "selection_ref": {
+        "kind": "named",
+        "component": "comp1",
+        "selection": "dom_slab"
+      },
+      "coordinate_system": {
+        "status": "complete",
+        "value": "global",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "statistic": {
+        "status": "complete",
+        "value": "Exactly 45 point samples at x_i=i*L/8 (i=0..8), y_j=j*H/4 (j=0..4), in meters, j outer/i inner. At every requested saved time solnum. Global Cartesian frame; domain dom_slab. ext=0, recover=off, coorderr=on, matherr=on; finite real values. No spatial averaging or extrapolation.",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "time": {
+        "status": "complete",
+        "value": "time in s: 0.5,0.6,0.7,0.8,0.9,1.0",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "frequency": {
+        "status": "not_applicable",
+        "value": null,
+        "reason": "No frequency/parameter sweep or mode.",
+        "unresolved_ids": []
+      },
+      "parameters": {
+        "status": "complete",
+        "value": "L=0.02[m]; H=0.01[m]; thickness=0.001[m]; k_slab=10[W/(m*K)]; rho_slab=1000[kg/m^3]; Cp_slab=1000[J/(kg*K)]; T_base=300[K]; T_amp=10[K]",
+        "reason": "This explicit sine-diffusion fixture only.",
+        "unresolved_ids": []
+      },
+      "mode": {
+        "status": "not_applicable",
+        "value": null,
+        "reason": "No frequency/parameter sweep or mode.",
+        "unresolved_ids": []
+      },
+      "required_solution": {
+        "status": "complete",
+        "kind": "planned",
+        "id": "transient-resume",
+        "reason": "Future requested field; resume additionally requires separately reviewed source solution.",
+        "unresolved_ids": []
+      }
+    }
+  },
+  "numerics": {
+    "mesh_hmax": "0.001[m]",
+    "mesh_hmin": "0.00025[m]",
+    "solver_rtol": "1e-8"
+  },
+  "scope": "Single fixed 2D linear heat diffusion, saved-field restart only. Task-specific fixture, no universal defaults."
+}

@@ -1,0 +1,1232 @@
+{
+  "case_id": "joule-slab-stationary-2d-v3",
+  "scope": "Bounded stationary Cartesian constant-isotropic two-physics verification fixture; no general defaults",
+  "tags": {
+    "component": "comp1",
+    "geometry": "geom1",
+    "material": "mat1",
+    "physics": "ht",
+    "physics_type": "HeatTransfer",
+    "temperature_left": "temp_left",
+    "temperature_right": "temp_right",
+    "insulation": "ins1",
+    "electric_physics": "ec",
+    "electric_physics_type": "ConductiveMedia",
+    "electric_left": "pot_left",
+    "electric_right": "pot_right",
+    "coupling": "emh",
+    "selections": {
+      "domain": "dom_slab",
+      "left": "bnd_left",
+      "right": "bnd_right",
+      "bottom": "bnd_bottom",
+      "top": "bnd_top",
+      "insulated": "bnd_insulated",
+      "electrodes": "bnd_electrodes"
+    }
+  },
+  "geometry_audit_tolerance_m": 1e-12,
+  "physical_initial_state": "Not applicable to this stationary case; no transient physical initial state imposed",
+  "variants": {
+    "base": {
+      "parameters": {
+        "L": "0.02[m]",
+        "H": "0.01[m]",
+        "thickness": "0.001[m]",
+        "k_slab": "10[W/(m*K)]",
+        "sigma_slab": "10000[S/m]",
+        "V_left": "0[V]",
+        "V_right": "0.1[V]",
+        "T_left": "300[K]",
+        "T_right": "300[K]"
+      },
+      "target_outputs": [
+        {
+          "name": "temperature_field",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "T",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "K",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "conductive_heat_flux",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "q=(-k_slab*d(T,x),-k_slab*d(T,y))",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W/m^2",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Ordered Cartesian vector qx,qy. Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "through_heat_rate",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "-k_slab*d(T,x)*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "bnd_right"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Outward +x adjacent-domain trace line integral; thickness once. API -k_slab*mean(d(T,x))*thickness only on verified single-neighbor exterior.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "potential_field",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "V",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "V",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "electric_current_density",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "J=(ec.Jx,ec.Jy)",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "A/m^2",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Actual EC current density Cartesian components. Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "joule_density",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "ec.Qh",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W/m^3",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Actual EC volumetric dissipation. Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "joule_power",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "ec.Qh*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Cartesian domain area integral; W/m^3 times thickness once and area -> W.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "outward_heat_left",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "k_slab*d(T,x)*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "bnd_left"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Outward -x adjacent-domain trace line integral; thickness once. API k_slab*mean(d(T,x))*thickness only on verified single-neighbor exterior.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "electrical_power",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "-V*(ec.Jx*nx+ec.Jy*ny)*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "bnd_electrodes"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Negative outward electric power flux over both electrodes. Independent left/right values and sum retained; thickness once. For constant scalar sigma, left API -sigma_slab*V*mean(d(V,x))*thickness, right +sigma_slab*V*mean(d(V,x))*thickness; prove one adjacent domain each. Components use actual EC sigma/gradV mapping.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.1[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-base",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        }
+      ]
+    },
+    "modified": {
+      "parameters": {
+        "L": "0.02[m]",
+        "H": "0.01[m]",
+        "thickness": "0.001[m]",
+        "k_slab": "10[W/(m*K)]",
+        "sigma_slab": "10000[S/m]",
+        "V_left": "0[V]",
+        "V_right": "0.2[V]",
+        "T_left": "300[K]",
+        "T_right": "300[K]"
+      },
+      "target_outputs": [
+        {
+          "name": "temperature_field",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "T",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "K",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "conductive_heat_flux",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "q=(-k_slab*d(T,x),-k_slab*d(T,y))",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W/m^2",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Ordered Cartesian vector qx,qy. Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "through_heat_rate",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "-k_slab*d(T,x)*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "bnd_right"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Outward +x adjacent-domain trace line integral; thickness once. API -k_slab*mean(d(T,x))*thickness only on verified single-neighbor exterior.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "potential_field",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "V",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "V",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "electric_current_density",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "J=(ec.Jx,ec.Jy)",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "A/m^2",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Actual EC current density Cartesian components. Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "joule_density",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "ec.Qh",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W/m^3",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Actual EC volumetric dissipation. Exactly 45 samples x=i*L/8 i=0..8, y=j*H/4 j=0..4 (j outer), Cartesian meters, stationary inner solnum 1; no averaging/extrapolation.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "joule_power",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "ec.Qh*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "dom_slab"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Cartesian domain area integral; W/m^3 times thickness once and area -> W.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "outward_heat_left",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "k_slab*d(T,x)*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "bnd_left"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Outward -x adjacent-domain trace line integral; thickness once. API k_slab*mean(d(T,x))*thickness only on verified single-neighbor exterior.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        },
+        {
+          "name": "electrical_power",
+          "status": "complete",
+          "reason": "Current bounded Joule validation task; actual state and result require separate current evidence.",
+          "expression": {
+            "status": "complete",
+            "value": "-V*(ec.Jx*nx+ec.Jy*ny)*thickness",
+            "reason": "Scientific expression; tuple defines components, not a single scalar API expression.",
+            "unresolved_ids": []
+          },
+          "unit": {
+            "status": "complete",
+            "value": "W",
+            "reason": "Requested output SI unit.",
+            "unresolved_ids": []
+          },
+          "selection_ref": {
+            "kind": "named",
+            "component": "comp1",
+            "selection": "bnd_electrodes"
+          },
+          "coordinate_system": {
+            "status": "complete",
+            "value": "global",
+            "reason": "2D global Cartesian x-y.",
+            "unresolved_ids": []
+          },
+          "statistic": {
+            "status": "complete",
+            "value": "Negative outward electric power flux over both electrodes. Independent left/right values and sum retained; thickness once. For constant scalar sigma, left API -sigma_slab*V*mean(d(V,x))*thickness, right +sigma_slab*V*mean(d(V,x))*thickness; prove one adjacent domain each. Components use actual EC sigma/gradV mapping.",
+            "reason": "Agreed sampling and integral convention before native result.",
+            "unresolved_ids": []
+          },
+          "time": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "frequency": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "parameters": {
+            "status": "complete",
+            "value": "L=0.02[m];H=0.01[m];thickness=0.001[m];k_slab=10[W/(m*K)];sigma_slab=10000[S/m];V_left=0[V];V_right=0.2[V];T_left=T_right=300[K]",
+            "reason": "Task-specific parameters, modeling owns changes.",
+            "unresolved_ids": []
+          },
+          "mode": {
+            "status": "not_applicable",
+            "value": null,
+            "reason": "Stationary single solution, no time/frequency/mode.",
+            "unresolved_ids": []
+          },
+          "required_solution": {
+            "status": "complete",
+            "kind": "planned",
+            "id": "joule-v3-modified",
+            "reason": "Future independently verified stationary result; no existing solution asserted.",
+            "unresolved_ids": []
+          }
+        }
+      ]
+    }
+  }
+}

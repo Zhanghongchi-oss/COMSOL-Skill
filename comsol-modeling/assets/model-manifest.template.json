@@ -1,0 +1,201 @@
+{
+  "schema_version": "2.0.0",
+  "producer": {
+    "skill": "comsol-modeling",
+    "operation": "inspect"
+  },
+  "model": {
+    "path": "REPLACE_WITH_ACTUAL_MODEL.mph",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "source_model": null,
+  "comsol": {
+    "version": "UNVERIFIED_TEMPLATE",
+    "build": null,
+    "license_status": "unknown",
+    "license_evidence": []
+  },
+  "inventory": {
+    "components": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "selections": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "pairs": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "parameters": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "materials": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "dependencies": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "target_outputs": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "assumptions": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "coordinate_systems": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "physical_initial_conditions": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "legacy_meshes": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "legacy_studies": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    },
+    "legacy_solutions": {
+      "status": "not_inspected",
+      "reason": "Template only; this group has not been inventoried.",
+      "evidence": [],
+      "unresolved_ids": [
+        "U_INVENTORY"
+      ]
+    }
+  },
+  "legacy": {
+    "meshes": null,
+    "studies": null,
+    "solutions": null
+  },
+  "unresolved": [
+    {
+      "id": "U_INVENTORY",
+      "question": "Template only: obtain actual model binding, version and authorized inventory before completing this record.",
+      "owner": "modeling",
+      "evidence": [],
+      "affected_scope": [
+        "all"
+      ],
+      "impacts": {
+        "solve": {
+          "effect": "unknown",
+          "reason": "No real model inspection has been performed."
+        },
+        "resume": {
+          "effect": "unknown",
+          "reason": "No real model inspection has been performed."
+        },
+        "export": {
+          "effect": "unknown",
+          "reason": "No real model inspection has been performed."
+        }
+      }
+    }
+  ],
+  "checks": {
+    "geometry_build": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "Template only. No COMSOL check has run."
+    },
+    "structure": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "Template only. No COMSOL check has run."
+    },
+    "reload": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "Template only. No COMSOL check has run."
+    },
+    "mesh_validation": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "Template only. No COMSOL check has run."
+    },
+    "solve_validation": {
+      "status": "not_run",
+      "model_sha256": null,
+      "evidence": [],
+      "notes": "Template only. No COMSOL check has run."
+    },
+    "details": []
+  },
+  "extensions": {
+    "template_only": true,
+    "warning": "Not a delivery manifest. Replace the model binding with actual bytes; retain unknowns until confirmed. Never copy passed states from examples."
+  },
+  "components": null,
+  "selections": null,
+  "pairs": null,
+  "parameters": null,
+  "materials": null,
+  "dependencies": null,
+  "target_outputs": null,
+  "assumptions": null,
+  "coordinate_systems": null,
+  "physical_initial_conditions": null
+}
