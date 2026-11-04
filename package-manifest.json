@@ -1,0 +1,421 @@
+{
+  "version": "v5-public-20261104",
+  "source_archive_sha256": "c5a50faf0c57fc4d54ab5917665229a4cca41c9e7f32e170e0d1fce511965566",
+  "modified_distribution_files": [
+    "comsol-modeling/assets/environment.local.json",
+    "comsol-modeling/references/api-discovery.md",
+    "comsol-modeling/references/history-evidence.md",
+    "comsol-compute/references/official-docs.md"
+  ],
+  "executable_sources_unchanged": true,
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "e96bb1d4e702b98c8f7b0f0c6693dd38a11a39ff05a95743bf11c7e66b8d4dbb"
+    },
+    {
+      "path": "comsol-compute/agents/openai.yaml",
+      "sha256": "0516d4201835371ccaa8e38422faef59ebf2939168bf4715ded0485f33a49fe6"
+    },
+    {
+      "path": "comsol-compute/assets/model-manifest.example.json",
+      "sha256": "c708b8981ae20453ead92f0333a859ad8b26b247b2c8fc31bb1eb9f317a517a9"
+    },
+    {
+      "path": "comsol-compute/assets/run-config.template.json",
+      "sha256": "0203fd49e0157a304ceb3d474bd003b4575141534ca15fc945e78908a466db19"
+    },
+    {
+      "path": "comsol-compute/examples/joule-slab/case-spec.json",
+      "sha256": "66e989b463c3ef9b7941b581420b71e7d98ac5bacf9590eb0d7efe1bbcb9cc14"
+    },
+    {
+      "path": "comsol-compute/examples/joule-slab/scripts/prepare_case.py",
+      "sha256": "826be79cdff9b93a3e246cd281aa941a8a58bba5be73aecbba24c974b202d193"
+    },
+    {
+      "path": "comsol-compute/examples/joule-slab/scripts/stage_driver.py",
+      "sha256": "30ae530c5140aed5697f164df3e8d6fd14b7d55d31021255ee2e5a46f71bb44f"
+    },
+    {
+      "path": "comsol-compute/examples/joule-slab/src/JouleComputeAdapter.java",
+      "sha256": "978d9548869f09a7b1614b72080c5b93699e48210300eb0d5025a87064186d7a"
+    },
+    {
+      "path": "comsol-compute/examples/nonlinear-joule/case-spec.json",
+      "sha256": "8395cb51b277628eb196d8e2f179ad7dcc491be154bba74e998e6e4796cdbe66"
+    },
+    {
+      "path": "comsol-compute/examples/nonlinear-joule/scripts/prepare_case.py",
+      "sha256": "f91d04b7b201de59d624b39179b952bc767c160f7a9f7136692a82f15a1baf33"
+    },
+    {
+      "path": "comsol-compute/examples/nonlinear-joule/scripts/stage_driver.py",
+      "sha256": "d2b39b975fd4549dba66b73dd5414b0e6cdba4ff74c1c1263ab12a37ca6c4861"
+    },
+    {
+      "path": "comsol-compute/examples/nonlinear-joule/src/NonlinearJouleComputeAdapter.java",
+      "sha256": "aecac0e81189f7afe02bf0e51294bd6dd9ebb6659dc6ef1dafa98e339728a8f7"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/api-port-evidence.json",
+      "sha256": "f1e2ac8d584f747122bf5e4b036a08ef8861ce493ff696abfbf321c69373da4b"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/case-spec.json",
+      "sha256": "35173c3cf5f06594a3a78dadca3f976e394489d9a8c840b65634c088203926cf"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/port-summary.json",
+      "sha256": "8c41c4be89b373afc6eb16f1732b94c5960dfe4092979ae52be177ebe3110386"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/scripts/compare_mesh.py",
+      "sha256": "5ad04a6e799a2451e632183b31295f636abb0fd84f789c65e247fda3bcf3bc65"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/scripts/prepare_case.py",
+      "sha256": "988b4f5314b4f7ac0b1c56ac19514143e856b6c0f2f8363cc373d00d1dd7193c"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/scripts/resource_guard.py",
+      "sha256": "5f6bd320b9d23415a152703047f32d37f535afb424e3437b159a5ccf5de70ff0"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/scripts/stage_driver.py",
+      "sha256": "ab745af7c5b1d9eb387fec8433e75582b25b9892b744fcbef3c66a24e6cad9d6"
+    },
+    {
+      "path": "comsol-compute/examples/steady-slab/src/SlabComputeAdapter.java",
+      "sha256": "ada2141ec3fd0071433170d1690e095b8d54b3453ff7161549d5fda68e6ec22f"
+    },
+    {
+      "path": "comsol-compute/examples/transient-slab/case-spec.json",
+      "sha256": "69b0224722fd8d50ef3985e84df8f3531e32b4434eddac8f1e93fbe8e9b3aec9"
+    },
+    {
+      "path": "comsol-compute/examples/transient-slab/scripts/prepare_case.py",
+      "sha256": "31604459ea9675baa46b048c7a2452ecfb37a677f618f38c4d8eb5ecb83b0eda"
+    },
+    {
+      "path": "comsol-compute/examples/transient-slab/scripts/stage_driver.py",
+      "sha256": "32189f24ca5b38ea4a2f945491034791b874625f1f26105184b9d6ac7e8d1153"
+    },
+    {
+      "path": "comsol-compute/examples/transient-slab/src/TransientComputeAdapter.java",
+      "sha256": "16fdd0994a7dfca03252e72eddcbf9d12997179e53772f30156c2624eac03c29"
+    },
+    {
+      "path": "comsol-compute/references/capabilities.md",
+      "sha256": "c207b400e7514d3f758349f75e1c86384e60aff915849a52a45b7178d5dcb1a1"
+    },
+    {
+      "path": "comsol-compute/references/compute-operation-review.md",
+      "sha256": "7ea6a3be5ab8ae39105f835a43a396f348855ce83a979a3910e7da12669b4da4"
+    },
+    {
+      "path": "comsol-compute/references/contract-v2.md",
+      "sha256": "01fb9fe1d3f86c2404796e4559a0c3973e72325b41e43652d31332275fe8254b"
+    },
+    {
+      "path": "comsol-compute/references/execution.md",
+      "sha256": "00c357ad9b093abebc1dbd3d4d086625591301f8e6350489f60ba4a4a31e1b0b"
+    },
+    {
+      "path": "comsol-compute/references/handoff.md",
+      "sha256": "51d30530f7a63499da9a4ede88ece7134c430018167351d52bc9f1fdfd1fefa2"
+    },
+    {
+      "path": "comsol-compute/references/joule-slab.md",
+      "sha256": "1eee9076fcd892866e9b3806fa8d120d0a5e3b1d8af9373a8c8dc5422f0d1846"
+    },
+    {
+      "path": "comsol-compute/references/live-validation-20261102.md",
+      "sha256": "bcd95745d8ea47bca2204e37485198e3b39756fd4116005c0095651b19a86e24"
+    },
+    {
+      "path": "comsol-compute/references/live-validation-v3-20261102.md",
+      "sha256": "b044294b0c2aad0cf76e34e6d976e2c86aa636ec2183a1876abef2fab75afefa"
+    },
+    {
+      "path": "comsol-compute/references/live-validation-v4-20261102.md",
+      "sha256": "7bbf3d23c5b9197f2188b5f90119358c20e8e76fcc551e7657cd906a556739f3"
+    },
+    {
+      "path": "comsol-compute/references/live-validation-v5-20261103.md",
+      "sha256": "d53b8e30910f3e517bbd2ca8a2201c2968c62c293020a9d8a343c870b6e7b728"
+    },
+    {
+      "path": "comsol-compute/references/migration.md",
+      "sha256": "f6d36a8b667e659a80793ad93740c09e9f2ab555a07b65cb975600b5930131b0"
+    },
+    {
+      "path": "comsol-compute/references/model-manifest.schema.json",
+      "sha256": "37b7aadf1bb13af905de414df2431a04441611a8eb02f1253a06f0bfff588fe2"
+    },
+    {
+      "path": "comsol-compute/references/nonlinear-joule.md",
+      "sha256": "c089a56019c128ad5f5c53a2e4e87ba87a9a3e71ba7cfe235e8b8be83ce18af3"
+    },
+    {
+      "path": "comsol-compute/references/numerics.md",
+      "sha256": "e8945a65b15c37a1748bedeb0b37ab07ea3b7eed6c283c0429c671dfc760cd34"
+    },
+    {
+      "path": "comsol-compute/references/official-docs.md",
+      "sha256": "21c5c79d2cc4e3a90d7de364377fc7bf4a6d2e59ce4604e27b6e1257cb746ade"
+    },
+    {
+      "path": "comsol-compute/references/operation-review.md",
+      "sha256": "c5c6fefb9e05f07cb6fa50de3394463d3913d7fd730ee12066b81ba8b69d77bf"
+    },
+    {
+      "path": "comsol-compute/references/operation-review.schema.json",
+      "sha256": "dcc2824af6d2d8bcb83904659f9fdd895fc590032c92a6b5cec111e9ab69c1d6"
+    },
+    {
+      "path": "comsol-compute/references/protocol.md",
+      "sha256": "ac5105bcd97de37cbacab74fb5642e7e3038af0545d0120b065cd0e16046b4b2"
+    },
+    {
+      "path": "comsol-compute/references/results-validation.md",
+      "sha256": "e463c98e9c8425f2eeb5b2b9a73df77fce2fd0dcc4c7392eec25ee4a47a82076"
+    },
+    {
+      "path": "comsol-compute/references/solution-identity.md",
+      "sha256": "dafb3834835b4622823b796f94160a6483cbbcfe7b212008cfbe8a05a3e34f25"
+    },
+    {
+      "path": "comsol-compute/references/solver-observation.md",
+      "sha256": "c2187000db3961704796a76aa4c138672f7b031144191c7ccd35fbfc55b577b0"
+    },
+    {
+      "path": "comsol-compute/references/steady-slab.md",
+      "sha256": "a450eb632e58f9d8e3c0c47d3e8340e423feec8ea320384e7788e1c388bf034b"
+    },
+    {
+      "path": "comsol-compute/references/transient-slab.md",
+      "sha256": "8e77c58d2a57c80b348fed95366028ec504586c735e2cbdfa4ebc5375c35cd90"
+    },
+    {
+      "path": "comsol-compute/references/validator-interface.md",
+      "sha256": "bc30eede917dd058a34c5f98bb4cd4d61278051be8af0aada69056000e32df2e"
+    },
+    {
+      "path": "comsol-compute/scripts/compute_operation_review.py",
+      "sha256": "61f5349f13c72c2431131b21368653fd698a71af35d379a93fd229ea78ef3467"
+    },
+    {
+      "path": "comsol-compute/scripts/contract_v2.py",
+      "sha256": "4afaa44d80f647683762b50156c3f5fc2aab98132d15954884e990f1af20ce66"
+    },
+    {
+      "path": "comsol-compute/scripts/input_record.py",
+      "sha256": "4e97400f3fde3a99c06deace2019f547d5897e5112a3b13d1cbeeb72e3ef5e8f"
+    },
+    {
+      "path": "comsol-compute/scripts/operation_review.py",
+      "sha256": "2601965726f01e4ddeba823449c117d569621544a52bcb9fbec890792190741f"
+    },
+    {
+      "path": "comsol-compute/scripts/run_bundle.py",
+      "sha256": "b08966411b9ccc995bde89ab7664d991765f4e3995aeabc2757686c1e2e1b1ab"
+    },
+    {
+      "path": "comsol-compute/SKILL.md",
+      "sha256": "c56984d84353f0910fa825c0b902cef4dbb05c399862246b76a9288dcd518b8d"
+    },
+    {
+      "path": "comsol-modeling/agents/openai.yaml",
+      "sha256": "709d2988e231d4b78d9edb5d124c8270bf2d57618983a2bb66293605549cf8a0"
+    },
+    {
+      "path": "comsol-modeling/assets/conduction-readback/ConductionChecks.java.inc",
+      "sha256": "1fb1a0403a4acb593c8bf2e6a0e8ae4130998834dec2c2fe609d6fa238819ed7"
+    },
+    {
+      "path": "comsol-modeling/assets/conduction-readback/render.py",
+      "sha256": "603ad0f700e378e66dd525442ae37fb1877284366b27cebfd2bf2312ccde1ba3"
+    },
+    {
+      "path": "comsol-modeling/assets/environment.local.json",
+      "sha256": "165d89c4b7484ec5d8a98e4d6881e20a0f901139c1323713b30d7822fe76f673"
+    },
+    {
+      "path": "comsol-modeling/assets/InspectModel.java",
+      "sha256": "d91c293997075c0eecd47036fabd1af79d95b1672e9dfeb8ff12d8440175aff4"
+    },
+    {
+      "path": "comsol-modeling/assets/model-manifest.template.json",
+      "sha256": "427b9fdd952c9b0797ac1068b3b953970d99b6b65412ddd91c5338bf7f7f6658"
+    },
+    {
+      "path": "comsol-modeling/examples/joule-slab/case-spec.json",
+      "sha256": "27168eb61aecf73b17aec52d581130210f52f38ea209e26b5646608b451e6b2a"
+    },
+    {
+      "path": "comsol-modeling/examples/joule-slab/JouleModel.java.in",
+      "sha256": "7d418d173eaf4b99ea65cf58a187954168ada8b22952f9393aa4d0fb4a8fb35d"
+    },
+    {
+      "path": "comsol-modeling/examples/nonlinear-joule/case-spec.json",
+      "sha256": "7dcbd778a60ae28931ea2f8af75dcc8846644e3206e43969691a7efb64ac920a"
+    },
+    {
+      "path": "comsol-modeling/examples/nonlinear-joule/NonlinearJouleModel.java.in",
+      "sha256": "0c7f68ecc0ba8ad6d3438d915261d43fc10f50c0c22cd3dcad8703c7d4ed8faf"
+    },
+    {
+      "path": "comsol-modeling/examples/transient-slab/case-spec.json",
+      "sha256": "4413eb30788e17fdcbe4cdd9eb9f40ce0aae017c42d87c8f0bab8840e4b3d065"
+    },
+    {
+      "path": "comsol-modeling/examples/transient-slab/TransientModel.java.in",
+      "sha256": "156c5740eb0a8e43151b0f87ddee38578af091ac51c9a7f918f59d13b5ae77dc"
+    },
+    {
+      "path": "comsol-modeling/references/api-discovery.md",
+      "sha256": "7b08f2353f994da1b02b3de30055862d6eaa464187caea435539e164f1b936e7"
+    },
+    {
+      "path": "comsol-modeling/references/conduction-readback.md",
+      "sha256": "74000e4fec437b6391b6d5bf062cfac16f3a2ca905c667a537d89a388ce7d5bd"
+    },
+    {
+      "path": "comsol-modeling/references/contract-v2.md",
+      "sha256": "01fb9fe1d3f86c2404796e4559a0c3973e72325b41e43652d31332275fe8254b"
+    },
+    {
+      "path": "comsol-modeling/references/execution.md",
+      "sha256": "db08a228256a5bc3a92f7a721da5689457554e061797d884dc9749911b920261"
+    },
+    {
+      "path": "comsol-modeling/references/handoff.md",
+      "sha256": "396456c5ef3bb140f6ff27be5b6c9af6a07f14a50227a954066f56d33ba22fe4"
+    },
+    {
+      "path": "comsol-modeling/references/history-evidence.md",
+      "sha256": "b6381d5b025f245dffd1bb817328e374acaa822b7fc7d610fff69f41ca50867d"
+    },
+    {
+      "path": "comsol-modeling/references/inventory-api.md",
+      "sha256": "a083442db577075e66e9bed5d3a4a6f1908735ef3045b4ae56da7893a2388b67"
+    },
+    {
+      "path": "comsol-modeling/references/joule-slab.md",
+      "sha256": "758f1b2f3ab4a287c4cf262a32cc220401094bb21155538b79f7dbcf0cc0b4c0"
+    },
+    {
+      "path": "comsol-modeling/references/migration.md",
+      "sha256": "f6d36a8b667e659a80793ad93740c09e9f2ab555a07b65cb975600b5930131b0"
+    },
+    {
+      "path": "comsol-modeling/references/model-audit.md",
+      "sha256": "ff4fc04b74932b89a3a248c780150ef3131e05ff2a6d7895dfb0dc3aaf574eaf"
+    },
+    {
+      "path": "comsol-modeling/references/model-manifest.schema.json",
+      "sha256": "37b7aadf1bb13af905de414df2431a04441611a8eb02f1253a06f0bfff588fe2"
+    },
+    {
+      "path": "comsol-modeling/references/nonlinear-joule.md",
+      "sha256": "49b15a1163187bdbeee1c6f44cf955c7991a6e959d2f519561eb59641772a4d8"
+    },
+    {
+      "path": "comsol-modeling/references/operation-review.md",
+      "sha256": "c5c6fefb9e05f07cb6fa50de3394463d3913d7fd730ee12066b81ba8b69d77bf"
+    },
+    {
+      "path": "comsol-modeling/references/operation-review.schema.json",
+      "sha256": "dcc2824af6d2d8bcb83904659f9fdd895fc590032c92a6b5cec111e9ab69c1d6"
+    },
+    {
+      "path": "comsol-modeling/references/protocol.md",
+      "sha256": "ac5105bcd97de37cbacab74fb5642e7e3038af0545d0120b065cd0e16046b4b2"
+    },
+    {
+      "path": "comsol-modeling/references/solution-identity.md",
+      "sha256": "dafb3834835b4622823b796f94160a6483cbbcfe7b212008cfbe8a05a3e34f25"
+    },
+    {
+      "path": "comsol-modeling/references/transient-slab.md",
+      "sha256": "d937081fcdff0f273a75ba93eda657b3daf363b10ea0c83791bb5bb69386fcfc"
+    },
+    {
+      "path": "comsol-modeling/references/validator-interface.md",
+      "sha256": "bc30eede917dd058a34c5f98bb4cd4d61278051be8af0aada69056000e32df2e"
+    },
+    {
+      "path": "comsol-modeling/scripts/contract_v2.py",
+      "sha256": "4afaa44d80f647683762b50156c3f5fc2aab98132d15954884e990f1af20ce66"
+    },
+    {
+      "path": "comsol-modeling/scripts/Invoke-ComsolJava.ps1",
+      "sha256": "a7189ccd20457531ed772111621dc35a21bb94e6f6bacb823f90ae12718e53bf"
+    },
+    {
+      "path": "comsol-modeling/scripts/modeling_gate.py",
+      "sha256": "5cdfda922bfa0ab7856e95c10c3774cc02563b032056bcf096bf1cce4a11cb3d"
+    },
+    {
+      "path": "comsol-modeling/scripts/operation_review.py",
+      "sha256": "2601965726f01e4ddeba823449c117d569621544a52bcb9fbec890792190741f"
+    },
+    {
+      "path": "comsol-modeling/scripts/validate_manifest.py",
+      "sha256": "718545df3d3dc9c9a8beb90ead55e2d4205e620e8a01c3d3729bf415a18f6b7b"
+    },
+    {
+      "path": "comsol-modeling/SKILL.md",
+      "sha256": "d78038032972d118ecda6f29168700feb8246a76c8e9b43a4baa2bb348a05744"
+    },
+    {
+      "path": "handoff-review/contract-v2.md",
+      "sha256": "01fb9fe1d3f86c2404796e4559a0c3973e72325b41e43652d31332275fe8254b"
+    },
+    {
+      "path": "handoff-review/contract_v2.py",
+      "sha256": "4afaa44d80f647683762b50156c3f5fc2aab98132d15954884e990f1af20ce66"
+    },
+    {
+      "path": "handoff-review/migration.md",
+      "sha256": "f6d36a8b667e659a80793ad93740c09e9f2ab555a07b65cb975600b5930131b0"
+    },
+    {
+      "path": "handoff-review/model-manifest.schema.json",
+      "sha256": "37b7aadf1bb13af905de414df2431a04441611a8eb02f1253a06f0bfff588fe2"
+    },
+    {
+      "path": "handoff-review/operation-review.md",
+      "sha256": "c5c6fefb9e05f07cb6fa50de3394463d3913d7fd730ee12066b81ba8b69d77bf"
+    },
+    {
+      "path": "handoff-review/operation-review.schema.json",
+      "sha256": "dcc2824af6d2d8bcb83904659f9fdd895fc590032c92a6b5cec111e9ab69c1d6"
+    },
+    {
+      "path": "handoff-review/operation_review.py",
+      "sha256": "2601965726f01e4ddeba823449c117d569621544a52bcb9fbec890792190741f"
+    },
+    {
+      "path": "handoff-review/protocol.md",
+      "sha256": "ac5105bcd97de37cbacab74fb5642e7e3038af0545d0120b065cd0e16046b4b2"
+    },
+    {
+      "path": "handoff-review/release-v2.0.0-candidate-04-doc-01.json",
+      "sha256": "608b58acfc1f756aa9d66d4e74aef6ec004ca58448bafcd74b7cf209a5e02df9"
+    },
+    {
+      "path": "handoff-review/solution-identity.md",
+      "sha256": "dafb3834835b4622823b796f94160a6483cbbcfe7b212008cfbe8a05a3e34f25"
+    },
+    {
+      "path": "handoff-review/validator-interface.md",
+      "sha256": "bc30eede917dd058a34c5f98bb4cd4d61278051be8af0aada69056000e32df2e"
+    },
+    {
+      "path": "README.md",
+      "sha256": "7178609bbac3142d72278dba0975a875df381efa288b45a85b5bc574e49c66dd"
+    }
+  ]
+}

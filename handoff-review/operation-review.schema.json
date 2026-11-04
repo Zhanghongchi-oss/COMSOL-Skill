@@ -1,0 +1,461 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:comsol-skill:operation-review:2.0.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_type",
+    "review_id",
+    "created_at",
+    "input_kind",
+    "operation",
+    "scope",
+    "status",
+    "manifest",
+    "model",
+    "model_spec",
+    "target_names",
+    "runtime_files",
+    "pins",
+    "unresolved_decisions",
+    "target_reviews",
+    "dependency_verification",
+    "errors",
+    "public_errors",
+    "side_errors",
+    "todos",
+    "authorization_granted",
+    "comsol_model_check_performed",
+    "scientific_validity_verified",
+    "limitations",
+    "input_status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "record_type": {
+      "const": "operation_review"
+    },
+    "review_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "input_kind": {
+      "enum": [
+        "manifest",
+        "mph_only",
+        "new_model"
+      ]
+    },
+    "operation": {
+      "enum": [
+        "prepare",
+        "inspect",
+        "build",
+        "modify",
+        "solve",
+        "resume",
+        "export"
+      ]
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "pending",
+        "blocked"
+      ]
+    },
+    "manifest": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/file"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "model": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/file"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "model_spec": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/file"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "target_names": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "runtime_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "role"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    "pins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256",
+          "roles"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "sha256": {
+            "$ref": "#/$defs/hash"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "unresolved_decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "relevant",
+          "impact",
+          "reason",
+          "affected_scope"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "relevant": {
+            "type": "boolean"
+          },
+          "impact": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "affected_scope": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "target_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "status",
+          "pending_fields"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "status": {
+            "enum": [
+              "complete",
+              "pending",
+              "not_applicable"
+            ]
+          },
+          "pending_fields": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          }
+        }
+      }
+    },
+    "dependency_verification": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "role",
+          "required",
+          "status",
+          "sha256"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "verified",
+              "missing",
+              "changed"
+            ]
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/hash"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "public_errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "path",
+          "message"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "description": "Compatibility alias with path in place of instance_path; must correspond exactly to errors."
+    },
+    "side_errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "path",
+          "message"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    "todos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "path",
+          "message"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "path": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    "authorization_granted": {
+      "const": false
+    },
+    "comsol_model_check_performed": {
+      "const": false
+    },
+    "scientific_validity_verified": {
+      "const": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "input_status": {
+      "enum": [
+        "pending_contract_check",
+        "pending_model_inspection",
+        "new_model_definition",
+        "rejected",
+        "input_files_verified"
+      ]
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "instance_path",
+          "message"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "instance_path": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Normative public errors only. Compare code plus instance_path; never combine side_errors or todos. candidate03 review must be rebuilt."
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "file": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "sha256": {
+          "$ref": "#/$defs/hash"
+        }
+      }
+    }
+  }
+}

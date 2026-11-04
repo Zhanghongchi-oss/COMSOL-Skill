@@ -1,0 +1,94 @@
+{
+  "schema_version": "2.0.0",
+  "release": "candidate04-doc01",
+  "base_candidate": "candidate04",
+  "release_date": "2026-11-02",
+  "supersedes": "release-v2.0.0-candidate-04.json",
+  "supersedes_sha256": "6964a81be2210a7a382701f9cd7d12474f46fa8a2c29ece6f62d84dac15a9bcf",
+  "status_at_publication": "published_pending_compute_document_sync",
+  "maintenance_source": "handoff-review",
+  "change_scope": "Documentation closeout only; contract-v2.md line 9 release authority wording",
+  "changes": [
+    "Replace hardcoded candidate03 authority with an explicitly selected, hash-identified immutable release manifest; keep subsequent sync/acceptance records separate"
+  ],
+  "files": [
+    {
+      "source": "model-manifest.schema.json",
+      "skill_destination": "references/model-manifest.schema.json",
+      "sha256": "37b7aadf1bb13af905de414df2431a04441611a8eb02f1253a06f0bfff588fe2"
+    },
+    {
+      "source": "operation-review.schema.json",
+      "skill_destination": "references/operation-review.schema.json",
+      "sha256": "dcc2824af6d2d8bcb83904659f9fdd895fc590032c92a6b5cec111e9ab69c1d6"
+    },
+    {
+      "source": "protocol.md",
+      "skill_destination": "references/protocol.md",
+      "sha256": "ac5105bcd97de37cbacab74fb5642e7e3038af0545d0120b065cd0e16046b4b2"
+    },
+    {
+      "source": "contract-v2.md",
+      "skill_destination": "references/contract-v2.md",
+      "sha256": "01fb9fe1d3f86c2404796e4559a0c3973e72325b41e43652d31332275fe8254b"
+    },
+    {
+      "source": "operation-review.md",
+      "skill_destination": "references/operation-review.md",
+      "sha256": "c5c6fefb9e05f07cb6fa50de3394463d3913d7fd730ee12066b81ba8b69d77bf"
+    },
+    {
+      "source": "validator-interface.md",
+      "skill_destination": "references/validator-interface.md",
+      "sha256": "bc30eede917dd058a34c5f98bb4cd4d61278051be8af0aada69056000e32df2e"
+    },
+    {
+      "source": "migration.md",
+      "skill_destination": "references/migration.md",
+      "sha256": "f6d36a8b667e659a80793ad93740c09e9f2ab555a07b65cb975600b5930131b0"
+    },
+    {
+      "source": "contract_v2.py",
+      "skill_destination": "scripts/contract_v2.py",
+      "sha256": "4afaa44d80f647683762b50156c3f5fc2aab98132d15954884e990f1af20ce66"
+    },
+    {
+      "source": "operation_review.py",
+      "skill_destination": "scripts/operation_review.py",
+      "sha256": "2601965726f01e4ddeba823449c117d569621544a52bcb9fbec890792190741f"
+    },
+    {
+      "source": "solution-identity.md",
+      "skill_destination": "references/solution-identity.md",
+      "sha256": "dafb3834835b4622823b796f94160a6483cbbcfe7b212008cfbe8a05a3e34f25"
+    }
+  ],
+  "public_tests": [
+    {
+      "source": "tests/fixtures_v2.py",
+      "sha256": "e2f65bcb8a502a05a1f601a8908c3b88c26a2b958467413d4f9c2e978d9d1b8f"
+    },
+    {
+      "source": "tests/test_public_contract.py",
+      "sha256": "a39dc0f63f8aff222667a60c78ca9ba51c4b9ccd0785baf5d3a75f307bd33d9c"
+    },
+    {
+      "source": "tests/test_operation_contract.py",
+      "sha256": "4f36d76265e7fd674a6b8bf92b2e8e8ecc3627e782992d58a7db67b48aeb2f19"
+    },
+    {
+      "source": "tests/test_solution_roles.py",
+      "sha256": "425476db2ccbd0d32c378fb5a74aeeb05b97bf345a1f26aa0bbd5ad03e5d8782"
+    }
+  ],
+  "unchanged": [
+    "schema_version and both JSON schemas",
+    "All public and private executable behavior",
+    "Other nine shared files",
+    "Public tests and CLI interfaces"
+  ],
+  "validation_at_publication": "pending_new_offline_public_regression",
+  "historical_records": "Preserved byte-for-byte; validation/public-doc-closeout-20261102/before-hashes.json records prior release/acceptance and shared inputs",
+  "comsol_execution": "not_run",
+  "authorization_granted": false
+}
